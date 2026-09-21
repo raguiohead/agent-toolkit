@@ -4,10 +4,10 @@
 
 .DESCRIPTION
     Cria Directory Junctions (links NTFS) sem exigir privilegios de administrador
-    para as pastas do Claude Code e Antigravity.
+    para as pastas do Claude Code, Antigravity e OpenAI Codex.
 
 .PARAMETER Target
-    Alvo da instalacao: 'All' (padrao), 'Claude' ou 'Antigravity'.
+    Alvo da instalacao: 'All' (padrao), 'Claude', 'Antigravity' ou 'Codex'.
 
 .PARAMETER DryRun
     Simula a execucao exibindo as acoes sem criar ou modificar arquivos/links.
@@ -17,13 +17,13 @@
 
 .EXAMPLE
     .\scripts\setup.ps1 -DryRun
-    .\scripts\setup.ps1 -Target Claude
+    .\scripts\setup.ps1 -Target Codex
     .\scripts\setup.ps1
 #>
 
 [CmdletBinding()]
 param(
-    [ValidateSet('All', 'Claude', 'Antigravity')]
+    [ValidateSet('All', 'Claude', 'Antigravity', 'Codex')]
     [string]$Target = 'All',
 
     [switch]$DryRun,
@@ -47,6 +47,7 @@ Write-Host "--------------------------------------------------------" -Foregroun
 $ClaudeSkillsDir      = "$HOME\.claude\skills"
 $ClaudeAgentsDir      = "$HOME\.claude\agents"
 $AntigravitySkillsDir = "$HOME\.gemini\config\skills"
+$CodexSkillsDir       = "$HOME\.codex\skills"
 
 # Contadores
 $stats = @{
@@ -130,6 +131,9 @@ foreach ($s in $skillDirs) {
     }
     if ($Target -eq 'All' -or $Target -eq 'Antigravity') {
         Create-SkillJunction -SkillSourceDir $s.FullName -DestParentDir $AntigravitySkillsDir -AgentName "Antigravity"
+    }
+    if ($Target -eq 'All' -or $Target -eq 'Codex') {
+        Create-SkillJunction -SkillSourceDir $s.FullName -DestParentDir $CodexSkillsDir -AgentName "Codex"
     }
 }
 

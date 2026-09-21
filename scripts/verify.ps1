@@ -107,7 +107,8 @@ if ($secretsFound -eq 0) {
 Write-Host "`n4. Auditando integridade das Junctions nos Agentes..." -ForegroundColor White
 $agentLocations = @(
     "$HOME\.claude\skills",
-    "$HOME\.gemini\config\skills"
+    "$HOME\.gemini\config\skills",
+    "$HOME\.codex\skills"
 )
 
 foreach ($loc in $agentLocations) {

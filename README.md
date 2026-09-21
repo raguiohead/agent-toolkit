@@ -4,7 +4,7 @@
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-blue.svg)]()
 [![License](https://img.shields.io/badge/license-Private-red.svg)]()
 
-Repositório pessoal, privado e agnóstico consolidando **skills modulares**, **subagentes especializados**, **templates MCP** e **scripts de automação** para **Claude Code**, **Antigravity** e assistentes de IA de alto desempenho.
+Repositório pessoal, privado e agnóstico consolidando **skills modulares**, **subagentes especializados**, **templates MCP** e **scripts de automação** para **Claude Code**, **Antigravity**, **OpenAI Codex** e assistentes de IA de alto desempenho.
 
 ---
 
@@ -48,7 +48,7 @@ Para vincular todas as skills e subagentes deste repositório aos seus agentes d
 .\scripts\setup.ps1 -DryRun
 ```
 
-### 2. Instalação Completa (Claude Code + Antigravity)
+### 2. Instalação Completa (Claude Code + Antigravity + Codex)
 ```powershell
 .\scripts\setup.ps1
 ```
@@ -60,6 +60,9 @@ Para vincular todas as skills e subagentes deste repositório aos seus agentes d
 
 # Apenas Antigravity (~/.gemini/config/skills)
 .\scripts\setup.ps1 -Target Antigravity
+
+# Apenas Codex (~/.codex/skills)
+.\scripts\setup.ps1 -Target Codex
 ```
 
 ### 4. Auditoria de Saúde & Segurança
