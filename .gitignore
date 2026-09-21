@@ -1,0 +1,33 @@
+# Segredos e variáveis de ambiente sensíveis
+.env
+.env.*
+*.env
+*.token
+*.key
+*.pem
+*credentials*.json
+*secret*
+
+# Caches e artefatos de agentes de IA
+.claude/sessions/
+.claude/backups/
+.gemini/
+.cache/
+*.log
+
+# Caches de runtime e dependências
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+dist/
+build/
+
+# Arquivos do Sistema Operacional
+Thumbs.db
+desktop.ini
+.DS_Store
+*.bak
+*.tmp
