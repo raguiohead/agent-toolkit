@@ -1,0 +1,17 @@
+{
+  "skill_name": "project-blueprint",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Crie a documentação completa de especificações (PRD, TDD, App Flow, Design Brief, Schema e Engineering Plan) para um aplicativo de Agendamento de Consultas Médicas.",
+      "expected_output": "Gera os 6 arquivos markdown (.docs/PRD.md, .docs/TDD.md, .docs/APP_FLOW.md, .docs/DESIGN_BRIEF.md, .docs/BACKEND_SCHEMA.md, .docs/ENGINEERING_PLAN.md) e adiciona .docs/ ao .gitignore.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Estou iniciando um projeto SaaS de Gestão Financeira Pessoal em Next.js e Tailwind com Prisma e PostgreSQL. Gere o blueprint técnico e de produto garantindo que os arquivos fican apenas locais.",
+      "expected_output": "Cria a suíte de 6 documentos estruturados para o SaaS financeiro em .docs/ e confirma a inclusão de .docs/ no .gitignore.",
+      "files": []
+    }
+  ]
+}
