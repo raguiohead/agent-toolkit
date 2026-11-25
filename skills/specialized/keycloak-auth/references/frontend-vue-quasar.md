@@ -16,7 +16,7 @@ yarn add keycloak-js
 Define environment variables in `.env`:
 ```env
 AUTH_URL=https://iam.domain.com/auth/
-KEYCLOAK_REALM=ServicosUnimed
+KEYCLOAK_REALM=meu-realm
 KEYCLOAK_CLIENT_ID=painel-atendente
 ```
 
@@ -49,7 +49,7 @@ let auth: Keycloak;
 
 const keycloak = new Keycloak({
   url: process.env.AUTH_URL as string,
-  realm: process.env.KEYCLOAK_REALM as string || 'ServicosUnimed',
+  realm: process.env.KEYCLOAK_REALM as string || 'meu-realm',
   clientId: process.env.KEYCLOAK_CLIENT_ID as string || 'painel-atendente',
 });
 

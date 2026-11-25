@@ -1,10 +1,8 @@
 # Plano de Implementação: Repositório `agent-toolkit`
 
 - **Data:** 2026-09-21
-- **Autor:** Guilherme Alves (@raguiohead)
 - **Status:** Pronto para Execução
-- **Especificação:** [`docs/superpowers/specs/2026-09-21-agent-toolkit-design.md`](file:///D:/code/agent-toolkit/docs/superpowers/specs/2026-09-21-agent-toolkit-design.md)
-- **Localização:** [`D:\code\agent-toolkit`](file:///D:/code/agent-toolkit)
+- **Especificação:** [`docs/superpowers/specs/2026-09-21-agent-toolkit-design.md`](../specs/2026-09-21-agent-toolkit-design.md)
 
 ---
 
@@ -13,7 +11,7 @@
 | Fase | Descrição | Arquivos / Pastas Impactadas | Critério de Aceite |
 |---|---|---|---|
 | **Fase 1** | Scaffolding da estrutura de pastas, `.gitignore` e `README.md` mestre | `.gitignore`, `README.md`, árvore de pastas | Estrutura limpa e versionada sem segredos |
-| **Fase 2** | Migração e categorização das skills agnósticas locais | `skills/*/*` | ~60 skills migradas, 0 skills corporativas Unimed |
+| **Fase 2** | Migração e categorização das skills agnósticas locais | `skills/*/*` | ~60 skills migradas, 0 skills corporativas/proprietárias |
 | **Fase 3** | Ingestão e curadoria dos 20 subagentes VoltAgent | `agents/*/*.md` | 20 arquivos `.md` baixados com YAML frontmatter válido |
 | **Fase 4** | Templates de configuração e schemas dos 10 MCPs | `mcps/configs/*.json`, `mcps/schemas/` | Configurações completas e 100% sanitizadas (sem tokens) |
 | **Fase 5** | Implementação dos scripts `setup.ps1` e `verify.ps1` | `scripts/setup.ps1`, `scripts/verify.ps1` | Idempotência validada, linter e security scanner aprovados |
@@ -42,7 +40,7 @@
   - `knowledge/`: `cognito-agent`, `obsidian-vault`, `book-to-skill`, `research`, `graphify`, `teach`.
   - `specialized/`: `frontend-design`, `prototype`, `qa`, `keycloak`, `keycloak-auth`, `sonarqube`.
   - `meta/`: `skill-creator`, `skill-search`, `find-skill`, `init-skills`, `install-skill`, `list-skills`, `update-skills`, `uninstall-skill`, `find-mcp`, `writing-great-skills`.
-- [ ] Auditar exclusão de skills Unimed (`central-notificacoes`, `g4-flex`, `unipix-sms`, `lambda`, `unimed-dev-standards`, `jira-tickets`, `logs-search`, `metrics-search`, `vera`).
+- [ ] Auditar e excluir skills proprietárias/corporativas que não devem ser publicadas.
 - [ ] Commit atômico: `feat(skills): catalogar e organizar acervo de skills agnosticas por categoria`.
 
 ### Fase 3: Ingestão dos Subagentes VoltAgent
@@ -77,4 +75,4 @@
 ### Fase 6: Validação Final e Preparação Remota
 - [ ] Rodar `scripts/verify.ps1` e certificar saída 100% verde (Exit Code 0).
 - [ ] Configurar remote Git oficial: `git remote add origin git@github.com:raguiohead/agent-toolkit.git`.
-- [ ] Exibir guia rápido para o Guilherme criar o repositório privado no GitHub e realizar o primeiro `git push -u origin main`.
+- [ ] Realizar o primeiro `git push -u origin main`.

@@ -36,9 +36,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://iam.domain.com/auth/realms/ServicosUnimed}
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://iam.domain.com/auth/realms/meu-realm}
           # Alternative explicit JWK set URI if issuer-uri auto-discovery is disabled:
-          # jwk-set-uri: https://iam.domain.com/auth/realms/ServicosUnimed/protocol/openid-connect/certs
+          # jwk-set-uri: https://iam.domain.com/auth/realms/meu-realm/protocol/openid-connect/certs
 
 keycloak:
   client-id: painel-atendente

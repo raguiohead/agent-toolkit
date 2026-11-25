@@ -16,8 +16,8 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "D:\\code",
-        "D:\\cognito"
+        "<CAMINHO_DO_REPO>",
+        "<CAMINHO_DO_VAULT>"
       ]
     },
     "git": {

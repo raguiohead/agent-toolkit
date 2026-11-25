@@ -27,7 +27,7 @@ import { Request, Response, NextFunction } from 'express';
 import { createRemoteJWKSet, jwtVerify, JWTPayload } from 'jose';
 
 const KEYCLOAK_URL = process.env.KEYCLOAK_URL || 'https://iam.domain.com/auth/';
-const REALM = process.env.KEYCLOAK_REALM || 'ServicosUnimed';
+const REALM = process.env.KEYCLOAK_REALM || 'meu-realm';
 const CLIENT_ID = process.env.KEYCLOAK_CLIENT_ID || 'painel-atendente';
 
 const JWKS_URI = `${KEYCLOAK_URL.replace(/\/$/, '')}/realms/${REALM}/protocol/openid-connect/certs`;

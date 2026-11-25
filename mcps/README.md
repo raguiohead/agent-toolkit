@@ -10,7 +10,7 @@ Este diretório contém as configurações e esquemas dos servidores MCP selecio
 |---|---|---|---|
 | **Sequential Thinking** | `@modelcontextprotocol/server-sequential-thinking` | Raciocínio estruturado passo a passo | Nenhuma |
 | **Context7** | `ctx7 mcp` (Upstash) | Injeção de docs oficiais em tempo real (Spring Boot, Vue, etc.) | `CONTEXT7_API_KEY` (Opcional, grátis em [context7.com](https://context7.com)) |
-| **Filesystem** | `@modelcontextprotocol/server-filesystem` | Manipulação de arquivos em diretórios autorizados | Caminhos permitidos (ex: `D:\code`, `D:\cognito`) |
+| **Filesystem** | `@modelcontextprotocol/server-filesystem` | Manipulação de arquivos em diretórios autorizados | Caminhos permitidos (ex: `C:\Users\voce\projetos`, `C:\Users\voce\vault`) |
 | **Git** | `@modelcontextprotocol/server-git` | Diffs, logs e histórico de repositórios locais | Nenhuma |
 | **GitHub** | `@modelcontextprotocol/server-github` | Operações no GitHub (Issues, PRs, repos) | `GITHUB_PERSONAL_ACCESS_TOKEN` |
 | **PostgreSQL** | `@modelcontextprotocol/server-postgres` | Consultas e inspeção de schema de banco de dados | Connection string local |
@@ -25,7 +25,7 @@ Este diretório contém as configurações e esquemas dos servidores MCP selecio
 ## 🚀 Como Ativar
 
 1. Copie o template desejado:
-   - Para Claude Desktop / Claude Code: [`mcps/configs/claude_desktop_config.example.json`](file:///D:/code/agent-toolkit/mcps/configs/claude_desktop_config.example.json) para o seu arquivo de configuração local (`%APPDATA%\Claude\claude_desktop_config.json`).
-   - Para Antigravity: [`mcps/configs/antigravity_mcp.example.json`](file:///D:/code/agent-toolkit/mcps/configs/antigravity_mcp.example.json).
+   - Para Claude Desktop / Claude Code: [`mcps/configs/claude_desktop_config.example.json`](configs/claude_desktop_config.example.json) para o seu arquivo de configuração local (`%APPDATA%\Claude\claude_desktop_config.json`).
+   - Para Antigravity: [`mcps/configs/antigravity_mcp.example.json`](configs/antigravity_mcp.example.json).
 2. Substitua os placeholders (`${GITHUB_TOKEN}`, `${EXA_API_KEY}`, etc.) pelas suas variáveis de ambiente ou tokens pessoais.
 3. Reinicie o aplicativo do agente.
