@@ -1,59 +1,101 @@
-# 🤖 Agent Toolkit — Arsenal Pessoal de IA & Engenharia
+# Agent Toolkit
 
-[![Status](https://img.shields.io/badge/status-active-brightgreen.svg)]()
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-blue.svg)]()
-[![License](https://img.shields.io/badge/license-Private-red.svg)]()
+Arsenal de **skills modulares**, **subagentes especializados**, **templates MCP** e **scripts de automação** para [Claude Code](https://claude.ai/code), [Antigravity](https://deepmind.google/technologies/gemini/code/) e [OpenAI Codex](https://platform.openai.com/docs/guides/code).
 
-Repositório pessoal, privado e agnóstico consolidando **skills modulares**, **subagentes especializados**, **templates MCP** e **scripts de automação** para **Claude Code**, **Antigravity**, **OpenAI Codex** e assistentes de IA de alto desempenho.
+Destinado a desenvolvedores que querem tirar o máximo dos seus assistentes de IA — adicionando comportamentos especializados, conexões com ferramentas externas e fluxos de trabalho prontos para usar.
 
 ---
 
-## 🧭 Visão Geral da Arquitetura
+## Por que existe?
+
+Assistentes de IA ficam mais úteis quando entendem o contexto do seu projeto, seguem metodologias de engenharia e têm acesso a ferramentas externas (Git, banco de dados, Docker, etc.). O Agent Toolkit empacota esse conhecimento em arquivos versionados e reutilizáveis, que você vincula ao seu agente local em vez de repetir instruções toda vez.
+
+---
+
+## Principais recursos
+
+| Componente | Quantidade | O que faz |
+|---|---|---|
+| **Skills** | 70 | Instruções especializadas que o agente segue sob demanda (TDD, revisão de código, design de sistemas, gestão de conhecimento, etc.) |
+| **Subagentes** | 20 | Agentes especializados invocáveis pelo Claude Code para tarefas de linguagem, arquitetura, debugging e IA |
+| **Templates MCP** | 2 | Configurações prontas (com placeholders) para habilitar servidores MCP no Claude Desktop e no Antigravity |
+| **Scripts PowerShell** | 2 | Automação de instalação via junctions NTFS e auditoria de saúde do ambiente |
+
+---
+
+## Como funciona
+
+Skills e subagentes são arquivos `.md` com frontmatter YAML lidos pelo agente na hora da invocação. Você não precisa copiar arquivos manualmente: `setup.ps1` cria junctions NTFS (links simbólicos do Windows) dos diretórios deste repositório para as pastas que o Claude Code, Antigravity e Codex esperam.
 
 ```
-agent-toolkit/
-├── skills/                     # Skills modulares em formato SKILL.md
-│   ├── engineering/            # Clean Code, TDD, Testes Unitários e Segurança
-│   ├── architecture/           # Design de Sistemas, Modelagem de Domínio e RFCs
-│   ├── workflow/               # Condução de tarefas, Brainstorming e Handoff
-│   ├── knowledge/              # Segundo Cérebro (Cognito, Obsidian, Book to Skill)
-│   ├── specialized/            # Frontend Design, QA, Keycloak e SonarQube
-│   └── meta/                   # Criação, busca e governança de skills
-├── agents/                     # Subagentes curados da VoltAgent para Claude Code (.md)
-│   ├── languages/              # Spring Boot, Java, Vue 3, TypeScript, SQL, Python, PowerShell
-│   ├── architecture/           # API Designer, MCP Developer, Docker Expert, Git Workflow
-│   ├── debugging/              # Debugger, Error Detective, Performance, Security Auditor
-│   └── reasoning-ai/           # Prompt Engineer, LLM Architect, Context Manager, First Principles
-├── mcps/                       # Camada de Model Context Protocol
-│   ├── configs/                # Templates sanitizados para Claude Desktop e Antigravity
-│   └── schemas/                # Schemas e documentações de ferramentas MCP
-├── scripts/
-│   ├── setup.ps1               # Automação de junctions NTFS nos agentes locais
-│   └── verify.ps1              # Linter de frontmatter, saúde de links e scanner de segredos
-├── docs/                       # Especificações e planos de implementação
-│   └── superpowers/
-│       ├── specs/              # Design técnico aprovado
-│       └── plans/              # Plano detalhado de engenharia
-└── README.md
+agent-toolkit/          ← este repositório
+    skills/
+        engineering/
+            tdd/SKILL.md ──junction──► ~/.claude/skills/tdd/SKILL.md
+            ...
+        workflow/
+        architecture/
+        ...
+    agents/
+        languages/
+            spring-boot-engineer.md ──copy──► ~/.claude/agents/spring-boot-engineer.md
+            ...
+    mcps/configs/       ← templates para configurar servidores MCP
+    scripts/
+        setup.ps1       ← instala junctions
+        verify.ps1      ← audita integridade
+```
+
+Depois da instalação, qualquer mensagem como `/tdd`, `/code-review` ou `use the spring-boot-engineer agent` faz o assistente carregar a skill ou invocar o subagente correto.
+
+---
+
+## Requisitos
+
+| Requisito | Versão mínima |
+|---|---|
+| **Windows** (para `setup.ps1` / `verify.ps1`) | Windows 10/11 |
+| **PowerShell** | 7.x (Core) |
+| **Claude Code** | qualquer versão recente |
+| **Node.js** (para servidores MCP via `npx`) | 18+ |
+
+**Linux / macOS:** os scripts são PowerShell e não possuem equivalente nativo neste repositório. É possível criar os mesmos links manualmente com `ln -s`:
+
+```bash
+# Exemplo: vincular todas as skills ao Claude Code
+for dir in skills/*/; do
+    ln -s "$(pwd)/$dir" ~/.claude/skills/$(basename "$dir")
+done
+
+# Exemplo: copiar subagentes
+cp agents/**/*.md ~/.claude/agents/
 ```
 
 ---
 
-## ⚡ Quickstart: Configurando seu Ambiente
+## Instalação e primeiro uso (Windows)
 
-Para vincular todas as skills e subagentes deste repositório aos seus agentes de IA locais no Windows (via **Junctions NTFS** idempotentes):
+### 1. Clonar o repositório
 
-### 1. Simulação (Dry Run)
+```bash
+git clone https://github.com/raguiohead/agent-toolkit.git
+cd agent-toolkit
+```
+
+### 2. Simular a instalação (recomendado antes de executar)
+
 ```powershell
 .\scripts\setup.ps1 -DryRun
 ```
 
-### 2. Instalação Completa (Claude Code + Antigravity + Codex)
+### 3. Instalar (Claude Code + Antigravity + Codex)
+
 ```powershell
 .\scripts\setup.ps1
 ```
 
-### 3. Instalação Específica por Agente
+### 4. Instalar apenas para um agente específico
+
 ```powershell
 # Apenas Claude Code (~/.claude/skills e ~/.claude/agents)
 .\scripts\setup.ps1 -Target Claude
@@ -65,74 +107,125 @@ Para vincular todas as skills e subagentes deste repositório aos seus agentes d
 .\scripts\setup.ps1 -Target Codex
 ```
 
-### 4. Auditoria de Saúde & Segurança
+### 5. Auditar saúde do ambiente
+
 ```powershell
 .\scripts\verify.ps1
 ```
-O script `verify.ps1` audita:
-- Se há links quebrados (*dangling junctions*);
-- Validação sintática do YAML frontmatter em 100% das skills e subagentes;
-- **Security Scanner:** Impede que tokens ou credenciais ativas subam para o Git.
 
----
+O `verify.ps1` verifica:
+- Junctions válidas (sem links quebrados)
+- Sintaxe do YAML frontmatter em todas as skills e subagentes
+- Ausência de tokens ou credenciais hardcoded
 
-## 📚 Catálogo de Skills por Categoria
+### 6. Configurar servidores MCP (opcional)
 
-| Categoria | Descrição | Principais Skills |
+Copie o template correspondente ao seu agente:
+
+| Agente | Template | Destino |
 |---|---|---|
-| **`skills/engineering/`** | Qualidade, testes e segurança | `code-reviewer`, `tdd`, `unit-tests`, `security-review`, `vibe-code-security`, `setup-pre-commit`, `setup-ts-deep-modules`, `migrate-to-shoehorn`, `resolving-merge-conflicts` |
-| **`skills/architecture/`** | Design e engenharia de software | `codebase-design`, `domain-modeling`, `design-an-interface`, `request-refactor-plan`, `improve-codebase-architecture`, `ubiquitous-language` |
-| **`skills/workflow/`** | Condução metódica de tarefas | `brainstorming`, `project-blueprint`, `grilling`, `grill-me`, `batch-grill-me`, `start-task`, `next-task`, `progress`, `standup`, `triage`, `verify`, `handoff` |
-| **`skills/knowledge/`** | Gestão de conhecimento e Segundo Cérebro | `cognito-agent`, `obsidian-vault`, `book-to-skill`, `research`, `graphify`, `teach` |
-| **`skills/specialized/`** | Frontend, QA e Autenticação | `frontend-design`, `prototype`, `qa`, `keycloak`, `keycloak-auth`, `sonarqube` |
-| **`skills/meta/`** | Criação e governança de skills | `skill-creator`, `skill-search`, `find-skill`, `init-skills`, `install-skill`, `list-skills`, `update-skills`, `writing-great-skills` |
+| Claude Desktop / Claude Code | [`mcps/configs/claude_desktop_config.example.json`](mcps/configs/claude_desktop_config.example.json) | `%APPDATA%\Claude\claude_desktop_config.json` |
+| Antigravity | [`mcps/configs/antigravity_mcp.example.json`](mcps/configs/antigravity_mcp.example.json) | Configuração do Antigravity |
+
+Substitua os placeholders (`${GITHUB_TOKEN}`, `${EXA_API_KEY}`, etc.) pelas suas variáveis de ambiente antes de usar.
 
 ---
 
-## 🤖 Catálogo de Subagentes Curados (VoltAgent)
+## Exemplo de uso
 
-Subagentes em formato `.md` instalados diretamente em `~/.claude/agents/`:
+Após a instalação, dentro do Claude Code:
 
-| Domínio | Subagente | Especialidade |
+```
+/tdd           → ativa o fluxo de Test-Driven Development
+/code-review   → inicia revisão estruturada do diff atual
+/brainstorming → abre sessão guiada de ideação
+/handoff       → gera resumo de contexto para troca de sessão
+```
+
+Para invocar um subagente especializado:
+
+```
+Use the spring-boot-engineer agent to implement this endpoint.
+Use the security-auditor agent to review this authentication flow.
+```
+
+---
+
+## Estrutura de pastas
+
+```
+agent-toolkit/
+├── skills/
+│   ├── engineering/    # Qualidade de código, TDD, revisão, segurança, Git
+│   ├── architecture/   # Design de sistemas, modelagem de domínio, refatoração
+│   ├── workflow/       # Condução de tarefas, brainstorming, triagem, handoff
+│   ├── knowledge/      # Gestão de conhecimento, Obsidian, pesquisa
+│   ├── specialized/    # Frontend design, QA, autenticação (Keycloak), SonarQube
+│   └── meta/           # Criação, busca e governança de skills
+├── agents/
+│   ├── languages/      # Spring Boot, Java, Vue 3, TypeScript, SQL, Python, PowerShell
+│   ├── architecture/   # API Designer, MCP Developer, Docker, Git Workflow
+│   ├── debugging/      # Debugger, Error Detective, Performance, Security Auditor
+│   └── reasoning-ai/   # Prompt Engineer, LLM Architect, Context Manager, First Principles
+├── mcps/
+│   ├── configs/        # Templates de configuração MCP (Claude Desktop, Antigravity)
+│   └── README.md       # Catálogo detalhado dos servidores MCP disponíveis
+├── scripts/
+│   ├── setup.ps1       # Instalação via junctions NTFS (idempotente)
+│   └── verify.ps1      # Auditoria de saúde, linting e scanner de segredos
+└── docs/
+    └── superpowers/    # Especificações técnicas e planos de implementação
+```
+
+---
+
+## Servidores MCP disponíveis
+
+Os templates em `mcps/configs/` configuram os seguintes servidores (via `npx`):
+
+| Servidor | Finalidade | Variável necessária |
 |---|---|---|
-| **Linguagens** | `spring-boot-engineer` | Spring Boot 3+, Microservices, GraalVM, Clean Architecture |
-| | `java-architect` | Padrões corporativos Java, concorrência e JVM tuning |
-| | `vue-expert` | Vue 3 Composition API, Quasar Framework, Pinia e TypeScript |
-| | `typescript-pro` | Tipagem estrita, utility types e arquitetura frontend modular |
-| | `sql-pro` | Modelagem relacional, otimização de queries e índices |
-| | `python-pro` | Scripts rápidos, automações e APIs assíncronas FastAPI |
-| | `powershell-7-expert` | Automação avançada de sistema e pipelines Windows/Linux |
-| **Arquitetura** | `api-designer` | Design de APIs RESTful, contratos OpenAPI e governança |
-| | `mcp-developer` | Desenvolvimento de servidores e ferramentas MCP |
-| | `docker-expert` | Dockerfiles multi-stage otimizados e Docker Compose |
-| | `git-workflow-manager` | Estratégia de branches, Conventional Commits e release flows |
-| **Qualidade & Debug** | `debugger` | Resolução sistemática de defeitos e bugs complexos |
-| | `error-detective` | Rastreamento e diagnóstico de causa-raiz em stacktraces |
-| | `performance-engineer` | Profiling de gargalos, latência e consumo de recursos |
-| | `security-auditor` | Varredura OWASP Top 10, sanitização e RBAC |
-| | `test-automator` | Pirâmide de testes e automação de testes de unidade e integração |
-| **IA & Raciocínio** | `prompt-engineer` | Engenharia de prompts, few-shot prompting e mitigação de slop |
-| | `llm-architect` | Arquitetura de sistemas baseados em LLM, RAG e harnesses |
-| | `context-manager` | Gestão eficiente de janelas de contexto e mitigação de Context Rot |
-| | `first-principles-thinking` | Resolução de problemas via decomposição em primeiros princípios |
+| `sequential-thinking` | Raciocínio passo a passo | — |
+| `context7` | Documentação oficial em tempo real | `CONTEXT7_API_KEY` (opcional) |
+| `filesystem` | Acesso a arquivos locais | Caminhos permitidos |
+| `git` | Diffs e histórico de repositórios | — |
+| `github` | Issues, PRs e repositórios GitHub | `GITHUB_PERSONAL_ACCESS_TOKEN` |
+| `postgres` | Consultas e inspeção de schema | String de conexão local |
+| `docker` | Monitoramento de containers | Docker Desktop ativo |
+| `playwright` | Automação de navegador | Node 18+ |
+| `chrome-devtools` | Depuração via CDP | — |
+| `exa` | Pesquisa web profunda | `EXA_API_KEY` |
+| `obsidian` | Leitura de vault Obsidian | `OBSIDIAN_VAULT_PATH` |
 
 ---
 
-## 🔌 Camada de Model Context Protocol (MCP)
+## Como contribuir
 
-O repositório fornece templates prontos em `mcps/configs/`:
-- `claude_desktop_config.example.json`
-- `antigravity_mcp.example.json`
+Este repositório é pessoal e não mantém um fluxo formal de contribuições externas. Forks são bem-vindos. Se encontrar um problema ou tiver uma sugestão, abra uma issue.
 
-### Servidores Integrados:
-1. **Raciocínio & Documentação:** `sequential-thinking` (Anthropic), `context7` (Upstash/Docs ao vivo), `memory`.
-2. **Engenharia Local:** `filesystem`, `git`, `github`, `postgres`, `docker`.
-3. **Web & Automação:** `playwright`, `chrome_devtools`, `exa`.
-4. **Conhecimento & Qualidade:** `obsidian`, `sonarqube`.
+Ao criar ou modificar skills, siga o padrão de frontmatter YAML existente e execute `verify.ps1` antes de commitar.
 
 ---
 
-## 🛡️ Política de Segurança e Compliance
+## Status do projeto
 
-1. **Zero Segredos no Git:** Chaves de API, senhas e tokens **nunca** são commitados. Utilize variáveis de ambiente locais referenciadas pelos templates.
-2. **Zero Dependência Corporativa:** Todas as ferramentas neste repositório são 100% agnósticas e utilizáveis em qualquer projeto pessoal ou de código aberto.
+Ativo. Novas skills e subagentes são adicionados conforme o uso prático revela necessidades.
+
+---
+
+## Licença
+
+Licença ainda não definida. Todo o conteúdo é fornecido como está, sem garantias.
+
+---
+
+## In English
+
+**Agent Toolkit** is a curated collection of modular skills, specialized sub-agents, MCP server templates, and automation scripts for Claude Code, Antigravity, and OpenAI Codex.
+
+- **Skills** (70): Markdown instruction files the AI agent loads on demand — covering TDD, code review, system design, brainstorming, knowledge management, and more.
+- **Sub-agents** (20): Specialized Claude Code agents for Spring Boot, Java, Vue 3, TypeScript, Python, SQL, PowerShell, Docker, API design, debugging, and AI reasoning.
+- **MCP templates** (2): Ready-to-use JSON configs (with placeholder variables) for Claude Desktop and Antigravity.
+- **PowerShell scripts**: `setup.ps1` links the repository into the agent's expected directories via NTFS junctions; `verify.ps1` audits integrity and scans for hardcoded secrets.
+
+See the sections above for installation instructions. Linux/macOS users can create symlinks manually — refer to the [Installation](#instalação-e-primeiro-uso-windows) section for the equivalent `ln -s` commands.

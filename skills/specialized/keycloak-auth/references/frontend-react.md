@@ -17,7 +17,7 @@ import Keycloak from 'keycloak-js';
 
 const keycloak = new Keycloak({
   url: process.env.REACT_APP_KEYCLOAK_URL || 'https://iam.domain.com/auth/',
-  realm: process.env.REACT_APP_KEYCLOAK_REALM || 'ServicosUnimed',
+  realm: process.env.REACT_APP_KEYCLOAK_REALM || 'meu-realm',
   clientId: process.env.REACT_APP_KEYCLOAK_CLIENT_ID || 'react-app-client',
 });
 

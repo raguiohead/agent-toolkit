@@ -1,10 +1,8 @@
 # Design Técnico: Repositório Pessoal `agent-toolkit`
 
 - **Data:** 2026-09-21
-- **Autor:** Guilherme Alves (@raguiohead)
 - **Status:** Aprovado (Brainstorming Concluído)
-- **Repositório GitHub:** `raguiohead/agent-toolkit` (Privado)
-- **Localização Local:** `D:\code\agent-toolkit`
+- **Repositório GitHub:** `raguiohead/agent-toolkit`
 
 ---
 
@@ -17,8 +15,8 @@ O **`agent-toolkit`** é um monorepo pessoal, privado e agnóstico de ferramenta
 4. **Automação Idempotente via PowerShell (`setup.ps1`):** Instalação automática via *junctions* NTFS para `~/.claude/skills`, `~/.claude/agents` e `~/.gemini/config/skills`.
 5. **Auditoria e Saúde (`verify.ps1`):** Verificação de integridade dos links, validação de sintaxe de frontmatter YAML e scanner de prevenção contra vazamento de segredos.
 
-### Política de Não-Vazamento e Isolamento Corporativo
-Conforme diretriz estrita, **nenhuma ferramenta, skill, plugin ou credencial proprietária da Unimed Ceará** (`central-notificacoes`, `g4-flex`, `unipix-sms`, `lambda`, `unimed-dev-standards`, `jira-tickets`, `logs-search`, `metrics-search`, `vera`, `oracle`, `otrs`, `zimbra`) fará parte deste repositório. O `agent-toolkit` é 100% agnóstico e voltado ao desenvolvimento de software de alta performance e uso pessoal.
+### Política de Não-Vazamento e Isolamento
+Conforme diretriz estrita, **nenhuma ferramenta, skill, plugin ou credencial proprietária de qualquer organização** fará parte deste repositório. O `agent-toolkit` é 100% agnóstico e voltado ao desenvolvimento de software de alta performance e uso pessoal/open source.
 
 ---
 
@@ -181,9 +179,9 @@ Thumbs.db
 
 ## 6. Governança Git e Setup Remoto
 
-1. **Repositório Local:** `D:\code\agent-toolkit` inicializado com branch padrão `main`.
-2. **Remote Oficial:** `git@github.com:raguiohead/agent-toolkit.git` (Repositório Privado).
-3. **Padrão de Commits:** Conventional Commits em Português do Brasil (`feat: ...`, `fix: ...`, `docs: ...`), atômicos e sem trailers de co-autoria.
+1. **Repositório Local:** `<seu-caminho>/agent-toolkit` inicializado com branch padrão `main`.
+2. **Remote Oficial:** `git@github.com:raguiohead/agent-toolkit.git`.
+3. **Padrão de Commits:** Conventional Commits em Português do Brasil (`feat: ...`, `fix: ...`, `docs: ...`), atômicos.
 4. **Passos de Implementação (Writing-Plans):**
    - Fase 1: Inicialização da estrutura de pastas, `.gitignore` e `README.md`.
    - Fase 2: Migração e cópia seletiva das skills agnósticas locais de `~/.gemini/config/skills`.
