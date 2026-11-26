@@ -33,8 +33,8 @@ Keycloak is an open-source Identity and Access Management solution supporting OA
 ## 2. Quick-Start Integration Guide
 
 Detailed code samples for Python and JavaScript can be found in the bundled reference files:
-- Python integration details: [python-integration.md](file:///C:/Users/guilhermealves/.gemini/config/skills/keycloak/references/python-integration.md)
-- JavaScript / TypeScript details: [javascript-integration.md](file:///C:/Users/guilhermealves/.gemini/config/skills/keycloak/references/javascript-integration.md)
+- Python integration details: [python-integration.md](references/python-integration.md)
+- JavaScript / TypeScript details: [javascript-integration.md](references/javascript-integration.md)
 
 ### Quick Summary: Python (FastAPI / Requests)
 ```python
@@ -107,7 +107,7 @@ if (keycloak.authenticated) {
 
 ## 4. Automation & Provisioning (Realm/Client/User)
 
-Automation reference guide: [automation-and-provisioning.md](file:///C:/Users/guilhermealves/.gemini/config/skills/keycloak/references/automation-and-provisioning.md)
+Automation reference guide: [automation-and-provisioning.md](references/automation-and-provisioning.md)
 
 - **Keycloak Admin REST API**: Manage realms, clients, users, roles, and client scopes programmatically.
 - **Python `keycloak-admin`**:
@@ -137,7 +137,7 @@ Automation reference guide: [automation-and-provisioning.md](file:///C:/Users/gu
 
 ## 5. Troubleshooting Steps & Failure Modes
 
-Full troubleshooting guide: [troubleshooting-and-production.md](file:///C:/Users/guilhermealves/.gemini/config/skills/keycloak/references/troubleshooting-and-production.md)
+Full troubleshooting guide: [troubleshooting-and-production.md](references/troubleshooting-and-production.md)
 
 ### Common Failure Modes & Solutions
 

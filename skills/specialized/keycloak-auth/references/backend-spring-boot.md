@@ -51,7 +51,7 @@ keycloak:
 Keycloak stores roles in nested JSON structures (`realm_access.roles` and `resource_access.<client_id>.roles`). Convert these into Spring Security authorities (`ROLE_<ROLE_NAME>`):
 
 ```java
-package com.unimedceara.config;
+package com.example.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
@@ -105,7 +105,7 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
 ## 4. Security Configuration (`SecurityConfig.java`)
 
 ```java
-package com.unimedceara.config;
+package com.example.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -178,7 +178,7 @@ public class SecurityConfig {
 In your REST controllers, inject the authenticated `Jwt` principal:
 
 ```java
-package com.unimedceara.controller;
+package com.example.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
